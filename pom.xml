@@ -8,6 +8,35 @@
     <artifactId>Ticket_Creator</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+
+        <repository>
+
+            <id>AsposeJavaAPI</id>
+
+            <name>Aspose Java API</name>
+
+            <url>https://repository.aspose.com/repo/</url>
+
+        </repository>
+
+    </repositories>
+    <dependencies>
+
+        <dependency>
+
+            <groupId>com.aspose</groupId>
+
+            <artifactId>aspose-imaging</artifactId>
+
+            <version>19.7</version>
+
+            <classifier>jdk16</classifier>
+
+            </dependency>
+
+    </dependencies>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
