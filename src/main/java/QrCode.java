@@ -1,5 +1,10 @@
+import net.glxn.qrgen.javase.QRCode;
+
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -10,16 +15,34 @@ public class QrCode {
     private int centreWidth;
 
     /**
-     *
-     * @param filepath absolute filepath of image
+     * @param qrCodeDetails Details of QrCode
      */
-    public QrCode(String filepath){
+    public QrCode(String qrCodeDetails) {
         try {
-            qrCode = ImageIO.read(new File(filepath));
+            ByteArrayOutputStream stream = QRCode
+                    .from(qrCodeDetails)
+                    .withSize(200, 200)
+                    .withColor(Color.BLACK.getRGB(),Color.TRANSLUCENT)
+                    .stream();
+            ByteArrayInputStream bis = new ByteArrayInputStream(stream.toByteArray());
 
-            centreHeight = qrCode.getHeight()/2;
-            centreWidth = qrCode.getWidth()/2;
-        } catch (IOException e) {
+            BufferedImage qrBackground = ImageIO.read(new File("src/main/resources/qr_small.png"));
+            BufferedImage qrCode = ImageIO.read(bis);
+
+            Graphics g = qrBackground.getGraphics();
+            g.drawImage(
+                    qrCode,
+                    qrBackground.getWidth()/2 - qrCode.getWidth()/2,
+                    qrBackground.getHeight()/2 - qrCode.getWidth()/2,
+                    null
+            );
+
+            this.qrCode = qrBackground;
+            centreHeight = qrBackground.getHeight() / 2;
+            centreWidth = qrBackground.getWidth() / 2;
+
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

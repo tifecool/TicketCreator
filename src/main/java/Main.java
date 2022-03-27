@@ -4,16 +4,23 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Scanner;
 import java.util.UUID;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class Test {
+public class Main {
 
     public static void main(String[] args) {
         try {
-            QrCode qrCode = new QrCode("C:\\Users\\tifeb\\Desktop\\Work Related\\Ticket_Creator\\src\\main\\resources\\smaller_black_square.png");
-            BackgroundImage backgroundImage = new BackgroundImage("C:\\Users\\tifeb\\Desktop\\Work Related\\Ticket_Creator\\src\\main\\resources\\white_square.png");
+
+            //uuid
+            String uuidString = UUID.randomUUID().toString();
+            Scanner input = new Scanner(System.in);
+            System.out.println("Name of guest: ");
+            String nameString = input.nextLine();
+            QrCode qrCode = new QrCode("Name: "+nameString+"\n"+"Unique ID: "+uuidString);
+            BackgroundImage backgroundImage = new BackgroundImage("src/main/resources/white_square.png");
 
 
             Graphics backgroundImageGraphics = backgroundImage.getBackgroundImage().getGraphics();
@@ -21,9 +28,7 @@ public class Test {
             backgroundImageGraphics.drawImage(qrCode.getQrCodeImage(), backgroundImage.getCentreWidth() - qrCode.getCentreWidth(), backgroundImage.getCentreHeight() - qrCode.getCentreHeight(), null);
             Font font = new Font("Serif", Font.PLAIN, 12);
 
-            //uuid
-            String uuidString = UUID.randomUUID().toString();
-            JLabel name = new JLabel("NAme Man ME",SwingConstants.CENTER);
+            JLabel name = new JLabel(nameString,SwingConstants.CENTER);
             JLabel uuid = new JLabel(uuidString, SwingConstants.CENTER);
             uuid.setForeground(Color.BLACK);
             name.setForeground(Color.BLACK);
@@ -50,7 +55,7 @@ public class Test {
             f.setVisible(true);
 
             Container c = f.getContentPane();
-            BufferedImage im = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            BufferedImage im = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
             c.paint(im.getGraphics());
             ImageIO.write(im, "PNG", new File("C:\\Users\\tifeb\\Desktop\\lol.png"));
 
