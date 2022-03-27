@@ -4,6 +4,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.UUID;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -20,8 +21,10 @@ public class Test {
             backgroundImageGraphics.drawImage(qrCode.getQrCodeImage(), backgroundImage.getCentreWidth() - qrCode.getCentreWidth(), backgroundImage.getCentreHeight() - qrCode.getCentreHeight(), null);
             Font font = new Font("Serif", Font.PLAIN, 12);
 
+            //uuid
+            String uuidString = UUID.randomUUID().toString();
             JLabel name = new JLabel("NAme Man ME",SwingConstants.CENTER);
-            JLabel uuid = new JLabel("UUIDDDDSDIDSNDNSDNSIDNDNSID", SwingConstants.CENTER);
+            JLabel uuid = new JLabel(uuidString, SwingConstants.CENTER);
             uuid.setForeground(Color.BLACK);
             name.setForeground(Color.BLACK);
             //uuid.setLocation(backgroundImage.getCentreWidth() - uuid.getWidth(), (backgroundImage.getBackgroundImage().getHeight() * 9) / 10);
