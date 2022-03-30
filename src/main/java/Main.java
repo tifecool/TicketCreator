@@ -19,8 +19,8 @@ public class Main {
             Scanner input = new Scanner(System.in);
             System.out.println("Name of guest: ");
             String nameString = input.nextLine();
-            QrCode qrCode = new QrCode("Name: "+nameString+"\n"+"Unique ID: "+uuidString);
-            BackgroundImage backgroundImage = new BackgroundImage("src/main/resources/white_square.png");
+            QrCode qrCode = new QrCode("Name: " + nameString + "\n" + "Unique ID: " + uuidString);
+            BackgroundImage backgroundImage = new BackgroundImage("src/main/resources/background1.jpg");
 
 
             Graphics backgroundImageGraphics = backgroundImage.getBackgroundImage().getGraphics();
@@ -28,36 +28,32 @@ public class Main {
             backgroundImageGraphics.drawImage(qrCode.getQrCodeImage(), backgroundImage.getCentreWidth() - qrCode.getCentreWidth(), backgroundImage.getCentreHeight() - qrCode.getCentreHeight(), null);
             Font font = new Font("Serif", Font.PLAIN, 12);
 
-            JLabel name = new JLabel(nameString,SwingConstants.CENTER);
+            JLabel name = new JLabel(nameString, SwingConstants.CENTER);
             JLabel uuid = new JLabel(uuidString, SwingConstants.CENTER);
             uuid.setForeground(Color.BLACK);
             name.setForeground(Color.BLACK);
-            //uuid.setLocation(backgroundImage.getCentreWidth() - uuid.getWidth(), (backgroundImage.getBackgroundImage().getHeight() * 9) / 10);
 
             JLabel picLabel = new JLabel(new ImageIcon(backgroundImage.getBackgroundImage()));
             picLabel.setLayout(new BorderLayout());
-            //JPanel jPanel = new JPanel();
-            uuid.setBorder(new EmptyBorder(0,0,backgroundImage.getBackgroundImage().getHeight()/10,0));
-            name.setBorder(new EmptyBorder(backgroundImage.getBackgroundImage().getHeight()/10,0,0,0));
+            uuid.setBorder(new EmptyBorder(0, 0, backgroundImage.getBackgroundImage().getHeight() / 10, 0));
+            name.setBorder(new EmptyBorder(backgroundImage.getBackgroundImage().getHeight() / 10, 0, 0, 0));
 
-            picLabel.add(name,BorderLayout.NORTH);
+            picLabel.add(name, BorderLayout.NORTH);
             picLabel.add(uuid, BorderLayout.SOUTH);
-            //jPanel.setLayout(null);
-            //jPanel.add(picLabel);
-            //jPanel.add(uuid);
 
             JFrame f = new JFrame();
-            f.setLayout(new GridBagLayout()); //Essential
+            f.setLayout(new GridBagLayout());
             f.add(picLabel);
             f.setSize(new Dimension(backgroundImage.getBackgroundImage().getWidth(), backgroundImage.getBackgroundImage().getHeight()));
+            f.setResizable(false);
             f.pack();
             f.setDefaultCloseOperation(EXIT_ON_CLOSE);
             f.setVisible(true);
 
             Container c = f.getContentPane();
             BufferedImage im = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-            c.paint(im.getGraphics());
-            ImageIO.write(im, "PNG", new File("C:\\Users\\tifeb\\Desktop\\lol.png"));
+            c.print(im.getGraphics());
+            ImageIO.write(im, "PNG", new File("C:\\Users\\tifeb\\Desktop\\" + nameString + " Ticket.png"));
 
         } catch (Exception ignored) {//Do proper Error checking
 
