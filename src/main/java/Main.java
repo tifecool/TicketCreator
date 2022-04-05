@@ -3,7 +3,10 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -53,9 +56,19 @@ public class Main {
             Container c = f.getContentPane();
             BufferedImage im = new BufferedImage(c.getWidth(), c.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
             c.print(im.getGraphics());
-            ImageIO.write(im, "PNG", new File("C:\\Users\\tifeb\\Desktop\\" + nameString + " Ticket.png"));
+            //Todo: Allow selection of directory and save location in memory
+            ImageIO.write(im, "PNG", new File("C:\\Users\\tifeb\\Desktop\\Tickets\\" + nameString + " Ticket.png"));
 
-        } catch (Exception ignored) {//Do proper Error checking
+            try(FileWriter fw = new FileWriter(new File("C:\\Users\\tifeb\\Desktop\\Tickets\\","list.txt"),true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw))
+            {
+                out.println(nameString + ": " + uuidString);
+            } catch (Exception e) {
+                //Todo: Do proper error checking
+            }
+
+        } catch (Exception ignored) {//Todo: Do proper Error checking
 
         }
     }

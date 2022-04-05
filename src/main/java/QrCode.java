@@ -26,7 +26,7 @@ public class QrCode {
                     .stream();
             ByteArrayInputStream bis = new ByteArrayInputStream(stream.toByteArray());
 
-            BufferedImage qrBackground = ImageIO.read(new File("src/main/resources/qr_small.png"));
+            BufferedImage qrBackground = ImageIO.read(new File("src/main/resources/qr_small_white.png"));
             BufferedImage qrCode = ImageIO.read(bis);
 
             Graphics g = qrBackground.getGraphics();
