@@ -29,12 +29,13 @@ public class Main {
             Graphics backgroundImageGraphics = backgroundImage.getBackgroundImage().getGraphics();
 
             backgroundImageGraphics.drawImage(qrCode.getQrCodeImage(), backgroundImage.getCentreWidth() - qrCode.getCentreWidth(), backgroundImage.getCentreHeight() - qrCode.getCentreHeight(), null);
-            Font font = new Font("Serif", Font.PLAIN, 12);
 
             JLabel name = new JLabel(nameString, SwingConstants.CENTER);
             JLabel uuid = new JLabel(uuidString, SwingConstants.CENTER);
             uuid.setForeground(Color.BLACK);
+            uuid.setFont(uuid.getFont().deriveFont(14f));
             name.setForeground(Color.BLACK);
+            name.setFont(name.getFont().deriveFont(14f));
 
             JLabel picLabel = new JLabel(new ImageIcon(backgroundImage.getBackgroundImage()));
             picLabel.setLayout(new BorderLayout());
