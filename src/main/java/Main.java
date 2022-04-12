@@ -13,17 +13,35 @@ import java.util.UUID;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Main {
+    public static final int VARIANT_ONE = 331;
+    public static final int VARIANT_TWO = 840;
 
     public static void main(String[] args) {
         try {
+            Scanner input = new Scanner(System.in);
+            //Pick variant
+            int variant;
+            while(true){
+                System.out.println("Variant type (1 or 2): ");
+                variant = Integer.parseInt(input.nextLine());
+
+                if(variant == 1){
+                    variant = VARIANT_ONE;
+                    break;
+                }else if(variant == 2){
+                    variant = VARIANT_TWO;
+                    break;
+                }
+
+                System.out.println("Enter either 1 or 2.");
+            }
 
             //uuid
             String uuidString = UUID.randomUUID().toString();
-            Scanner input = new Scanner(System.in);
             System.out.println("Name of guest: ");
             String nameString = input.nextLine();
             QrCode qrCode = new QrCode("Name: " + nameString + "\n" + "Unique ID: " + uuidString);
-            BackgroundImage backgroundImage = new BackgroundImage("src/main/resources/background1.jpg");
+            BackgroundImage backgroundImage = new BackgroundImage(variant == VARIANT_ONE ? "src/main/resources/background1.jpg": "src/main/resources/background2.png");
 
 
             Graphics backgroundImageGraphics = backgroundImage.getBackgroundImage().getGraphics();
